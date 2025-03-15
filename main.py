@@ -69,8 +69,8 @@ def gen_podcast_overall(topic):
   print(f"\nCombined audio saved as {output_filename}")
 
   first_audio = AudioSegment.from_file("result.mp3")
-  first_audio = first_audio._spawn(audio.raw_data, overrides={"frame_rate": int(audio.frame_rate * 1.2)})
-  first_audio = first_audio.set_frame_rate(audio.frame_rate)
+  first_audio = first_audio._spawn(first_audio.raw_data, overrides={"frame_rate": int(first_audio.frame_rate * 1.2)})
+  first_audio = first_audio.set_frame_rate(first_audio.frame_rate)
 
   second_audio = AudioSegment.from_file("Standup_comedy.mp3")
 
