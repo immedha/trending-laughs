@@ -35,6 +35,8 @@ def gen_podcast_overall(topic):
     script = generate_comedy_script(story, OPENAI_API_KEY)
     scripts.append(script)
 
+  if not scripts:
+    return None
   curr_script = scripts[0]
   sound_index = 0
   script_index = 0
@@ -226,6 +228,8 @@ if st.button("Submit"):
   if topic.strip():
     st.write("Generating audio... Please wait.")
     filename = gen_podcast_overall(topic)
+    if not filename:
+      st.error("Audio generation failed. Please try again.")
     
     if os.path.exists(filename):
       st.audio(filename, format="audio/mp3", start_time=0)
