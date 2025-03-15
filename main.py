@@ -17,15 +17,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 CACHED_PODCAST_SCRIPT = [
-    {"type": "script", "value": "Hey everyone, welcome to the show! So, AI is basically running our lives now. Like, I asked ChatGPT to write this set... and honestly? It did a better job than me."},
+    {"type": "script", "value": "Hey everyone, welcome to the show!"},
     
-    {"type": "sound-effect", "value": "Audience laughter and applause."},
-    
-    {"type": "script", "value": "AI is doing EVERYTHING! Writing emails, making music, even generating pictures. I asked AI to draw me as a superhero... It made me look like a mix between The Hulk and a potato."},
-    
-    {"type": "sound-effect", "value": "Cartoonish 'boing' sound followed by audience chuckling."},
-    
-    {"type": "script", "value": "Even job applications are AI now. You submit your resume, an AI scans it, another AI interviews you, and then an AI tells you, 'Unfortunately, we've decided to move forward with another AI.'"},
+    {"type": "sound-effect", "value": "Audience applause."},
+        
+    {"type": "script", "value": "AI is doing EVERYTHING!  Even job applications are AI now. You submit your resume, an AI scans it, another AI interviews you, and then an AI tells you, 'Unfortunately, we've decided to move forward with another AI.'"},
     
     {"type": "sound-effect", "value": "Dramatic 'wah-wah-wah' failure sound."},
     
@@ -43,15 +39,11 @@ CACHED_PODCAST_SCRIPT = [
 ]
 
 CACHED_PODCAST_SCRIPT_FROMLINK = [
-    {"type": "script", "value": "Hey everyone, welcome to the show! So, AI is basically running our lives now. Like, I asked ChatGPT to write this set... and honestly? It did a better job than me."},
+    {"type": "script", "value": "Hey everyone, welcome to the show!"},
     
-    {"type": "sound-effect", "value": "Audience laughter and applause."},
-    
-    {"type": "script", "value": "AI is doing EVERYTHING! Writing emails, making music, even generating pictures. I asked AI to draw me as a superhero... It made me look like a mix between The Hulk and a potato."},
-    
-    {"type": "sound-effect", "value": "Cartoonish 'boing' sound followed by audience chuckling."},
-    
-    {"type": "script", "value": "Even job applications are AI now. You submit your resume, an AI scans it, another AI interviews you, and then an AI tells you, 'Unfortunately, we've decided to move forward with another AI.'"},
+    {"type": "sound-effect", "value": "Audience applause."},
+        
+    {"type": "script", "value": "AI is doing EVERYTHING!  Even job applications are AI now. You submit your resume, an AI scans it, another AI interviews you, and then an AI tells you, 'Unfortunately, we've decided to move forward with another AI.'"},
     
     {"type": "sound-effect", "value": "Dramatic 'wah-wah-wah' failure sound."},
     

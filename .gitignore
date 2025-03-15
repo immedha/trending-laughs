@@ -2,3 +2,4 @@ venv/
 .env
 *.mp3
 !Standup_comedy.mp3
+!result_sample1.mp3
