@@ -11,3 +11,4 @@ Steps to run this:
 5. Run app by doing `streamlit run main.py`
 
 6. You can get News_API_KEY from https://newsapi.org/docs/client-libraries/python
+7. Presentation slides https://docs.google.com/presentation/d/1cwD9oKjCE9u7PvtyLCnRfM5Ng2LwUXxg2PtRzc-A7_Y/edit?usp=sharing
