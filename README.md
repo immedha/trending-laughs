@@ -4,7 +4,7 @@ Steps to run this:
 
 1. Clone the repo
 2. Do `cd https://github.com/immedha/trending-laughs`
-3. Create a `.env` with environment variables `NEWS_API_KEY`,`OPENAI_API_KEY`, `ELEVENLABS_API_KEY`.
+3. Create a `.env` with environment variables `NEWS_API_KEY`,`OPENAI_API_KEY`, `ELEVENLABS_API_KEY`. Also add a variable of `IS_DEMO` and set it to "true" or "false" depending on if you are doing the hackathon demo.
 4. Create a `venv` by doing `python -m venv` and activate it: `source venv/bin/activate`
 4. Install everything by doing `pip install -r requirements.txt`
 5. Do `brew install ffmpeg`

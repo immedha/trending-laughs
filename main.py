@@ -16,6 +16,59 @@ from dotenv import load_dotenv
 # Load environment variables from .env
 load_dotenv()
 
+CACHED_PODCAST_SCRIPT = [
+    {"type": "script", "value": "Hey everyone, welcome to the show! So, AI is basically running our lives now. Like, I asked ChatGPT to write this set... and honestly? It did a better job than me."},
+    
+    {"type": "sound-effect", "value": "Audience laughter and applause."},
+    
+    {"type": "script", "value": "AI is doing EVERYTHING! Writing emails, making music, even generating pictures. I asked AI to draw me as a superhero... It made me look like a mix between The Hulk and a potato."},
+    
+    {"type": "sound-effect", "value": "Cartoonish 'boing' sound followed by audience chuckling."},
+    
+    {"type": "script", "value": "Even job applications are AI now. You submit your resume, an AI scans it, another AI interviews you, and then an AI tells you, 'Unfortunately, we've decided to move forward with another AI.'"},
+    
+    {"type": "sound-effect", "value": "Dramatic 'wah-wah-wah' failure sound."},
+    
+    {"type": "script", "value": "And don’t even get me started on AI in dating apps. My friend’s AI chatbot matched with another AI chatbot, and now they're in a happier relationship than most humans!"},
+    
+    {"type": "sound-effect", "value": "Audience bursts into laughter with some clapping."},
+    
+    {"type": "script", "value": "AI assistants are even in our homes. I asked Alexa to set a reminder, and she hit me with, 'Maybe try remembering things yourself for once?'"},
+    
+    {"type": "sound-effect", "value": "Robotic voice saying 'Oooo, burn!' followed by laughter."},
+    
+    {"type": "script", "value": "The future is crazy, man. One day, we’ll wake up and AI will be running for president. And honestly? At this point, I might vote for it!"},
+    
+    {"type": "sound-effect", "value": "Audience cheering and clapping as outro music fades in."}
+]
+
+CACHED_PODCAST_SCRIPT_FROMLINK = [
+    {"type": "script", "value": "Hey everyone, welcome to the show! So, AI is basically running our lives now. Like, I asked ChatGPT to write this set... and honestly? It did a better job than me."},
+    
+    {"type": "sound-effect", "value": "Audience laughter and applause."},
+    
+    {"type": "script", "value": "AI is doing EVERYTHING! Writing emails, making music, even generating pictures. I asked AI to draw me as a superhero... It made me look like a mix between The Hulk and a potato."},
+    
+    {"type": "sound-effect", "value": "Cartoonish 'boing' sound followed by audience chuckling."},
+    
+    {"type": "script", "value": "Even job applications are AI now. You submit your resume, an AI scans it, another AI interviews you, and then an AI tells you, 'Unfortunately, we've decided to move forward with another AI.'"},
+    
+    {"type": "sound-effect", "value": "Dramatic 'wah-wah-wah' failure sound."},
+    
+    {"type": "script", "value": "And don’t even get me started on AI in dating apps. My friend’s AI chatbot matched with another AI chatbot, and now they're in a happier relationship than most humans!"},
+    
+    {"type": "sound-effect", "value": "Audience bursts into laughter with some clapping."},
+    
+    {"type": "script", "value": "AI assistants are even in our homes. I asked Alexa to set a reminder, and she hit me with, 'Maybe try remembering things yourself for once?'"},
+    
+    {"type": "sound-effect", "value": "Robotic voice saying 'Oooo, burn!' followed by laughter."},
+    
+    {"type": "script", "value": "The future is crazy, man. One day, we’ll wake up and AI will be running for president. And honestly? At this point, I might vote for it!"},
+    
+    {"type": "sound-effect", "value": "Audience cheering and clapping as outro music fades in."}
+]
+
+
 
 client = ElevenLabs(
   api_key=os.getenv("ELEVENLABS_API_KEY"),  # Replace with your actual API key
@@ -23,6 +76,7 @@ client = ElevenLabs(
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+IS_DEMO = os.getenv("IS_DEMO")
 
 def clean_text(text):
   text = re.sub(r'\s+', ' ', text).strip()
@@ -53,13 +107,22 @@ def gen_podcast_overall(topic, news):
   news_stories = None
   if news:
     print(news)
-    news_stories = [{"title": 'Monster storm pummeling central and southern US sparks tornadoes and fire, killing at least 18', "content": news}]
+    news_stories = [{"title": '', "content": news}]
   else:
-    news_stories = get_specific_us_news(topic, NEWS_API_KEY, 1)
+    if IS_DEMO == "true":
+      news_stories = [{"title": 'test', "content": 'test'}]
+    else:
+      news_stories = get_specific_us_news(topic, NEWS_API_KEY, 1)
   
   scripts = []
   for story in news_stories:
-    script = generate_comedy_script(story, OPENAI_API_KEY)
+    if IS_DEMO == "true":
+      if news:
+        script = CACHED_PODCAST_SCRIPT_FROMLINK
+      else:
+        script = CACHED_PODCAST_SCRIPT
+    else:
+      script = generate_comedy_script(story, OPENAI_API_KEY)
     scripts.append(script)
 
   if not scripts:
@@ -262,7 +325,10 @@ if option == "Topic":
   news = None
 else:
   news_url = st.text_input("Enter the URL of the news article:")
-  news = scrape_news(news_url)
+  if IS_DEMO == "true":
+    news = "Hardcoded content"
+  else:
+    news = scrape_news(news_url)
   topic = None
 # topic = st.text_input("Enter a topic for the news article or the link to the news article:")
 
