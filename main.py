@@ -5,6 +5,7 @@ import requests
 from newsapi import NewsApiClient
 import openai
 import json
+from bs4 import BeautifulSoup
 
 from elevenlabs import play, save
 from elevenlabs import ElevenLabs
@@ -23,13 +24,39 @@ client = ElevenLabs(
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
+def clean_text(text):
+  text = re.sub(r'\s+', ' ', text).strip()
+  return text
 
-def gen_podcast_overall(topic):
+def scrape_news(url):
+  try:
+    response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+    if response.status_code != 200:
+      return "Error!"
+    
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    paragraphs = soup.find_all('p')
+    news_content = " ".join([clean_text(p.get_text()) for p in paragraphs if p.get_text()])
+    
+    return news_content if news_content else "Hardcoded content"
+  
+  except Exception as e:
+    return f"Error"
+
+
+def gen_podcast_overall(topic, news):
   """
   Simulate backend processing. Replace this with your actual backend logic
   that generates an audio file named 'output.mp3'.
   """
-  news_stories = get_specific_us_news(topic, NEWS_API_KEY, 1)
+  news_stories = None
+  if news:
+    print(news)
+    news_stories = [{"title": 'Monster storm pummeling central and southern US sparks tornadoes and fire, killing at least 18', "content": news}]
+  else:
+    news_stories = get_specific_us_news(topic, NEWS_API_KEY, 1)
+  
   scripts = []
   for story in news_stories:
     script = generate_comedy_script(story, OPENAI_API_KEY)
@@ -225,12 +252,24 @@ def generate_audio(text: str, filename: str):
 
 st.title("News Article to Audio")
 
-topic = st.text_input("Enter a topic for the news article:")
+option = st.radio("Choose input type:", ("Topic", "News Article URL"))
+
+topic = None
+news = None
+
+if option == "Topic":
+  topic = st.text_input("Enter a topic for the news article:")
+  news = None
+else:
+  news_url = st.text_input("Enter the URL of the news article:")
+  news = scrape_news(news_url)
+  topic = None
+# topic = st.text_input("Enter a topic for the news article or the link to the news article:")
 
 if st.button("Submit"):
-  if topic.strip():
+  if (topic and topic.strip()) or news:
     st.write("Generating audio... Please wait.")
-    filename = gen_podcast_overall(topic)
+    filename = gen_podcast_overall(topic, news)
     if not filename:
       st.error("Audio generation failed. Please try again.")
     
