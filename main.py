@@ -305,7 +305,7 @@ def generate_audio(text: str, filename: str):
   )
   save(audio, filename)
 
-st.title("News Article to Audio")
+st.title("Trending Laughs")
 
 option = st.radio("Choose input type:", ("Topic", "News Article URL"))
 
