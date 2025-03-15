@@ -214,7 +214,7 @@ def generate_sound_effect(text: str, output_path: str):
 def generate_audio(text: str, filename: str):
   audio = client.text_to_speech.convert(
       text=text,
-      voice_id="AZkkvL9yURZOfEnVWW6d",
+      voice_id="NOpBlnGInO9m6vDvFkFC",
       model_id="eleven_multilingual_v2",
       output_format="mp3_44100_128",
   )
