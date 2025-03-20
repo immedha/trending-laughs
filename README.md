@@ -1,6 +1,11 @@
 # trending-laughs
+> [!IMPORTANT]  
+> 🎉 This project won Microsoft Reactor Redmond's [OSS4AI Hackathon #15 - AI Agents](https://lu.ma/9bx3hw3v?tk=l6UyJ0)! 🎉
+> 
+> View our project demo & slides [here](https://docs.google.com/presentation/d/1cwD9oKjCE9u7PvtyLCnRfM5Ng2LwUXxg2PtRzc-A7_Y/edit?usp=sharing)
 
-Steps to run this:
+
+Steps to run this repo:
 
 1. Clone the repo
 2. Do `cd https://github.com/immedha/trending-laughs`
